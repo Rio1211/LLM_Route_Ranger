@@ -8,6 +8,8 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.prompts import ChatPromptTemplate
 from dotenv import load_dotenv
 from src.prompt import *
+from langchain.memory import ConversationBufferMemory
+from langchain_core.prompts import MessagesPlaceholder
 import os
 
 app = Flask(__name__)
@@ -39,8 +41,15 @@ chatModel = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system_prompt),
-        ("human", "{input}"),
+        ("human", "{chat_history}\n{input}"),
     ]
+)
+
+memory = ConversationBufferMemory(
+    memory_key="chat_history",
+    input_key="input",
+    output_key="answer",
+    return_messages=True
 )
 
 question_answer_chain = create_stuff_documents_chain(chatModel, prompt)
@@ -55,7 +64,17 @@ def chat():
     msg = request.form["msg"]
     input = msg
     print(input)
-    response = rag_chain.invoke({"input": msg})
+
+    chat_history = memory.chat_memory.messages
+    
+    response = rag_chain.invoke({
+        "input": msg,
+        "chat_history": chat_history
+    })
+    
+    memory.chat_memory.add_user_message(msg)
+    memory.chat_memory.add_ai_message(response["answer"])
+
     print("Response : ", response["answer"])
     return str(response["answer"])
 
