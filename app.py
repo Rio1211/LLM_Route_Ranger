@@ -24,7 +24,7 @@ os.environ["GOOGLE_API_KEY"] = GOOGLE_API_KEY
 
 embeddings = download_embeddings()
 
-index_name = "medical-chatbot-final"
+index_name = "route-ranger"
 #Embved each chunk and upsert the embeddings into the Pinecone index
 docsearch = PineconeVectorStore.from_existing_index(
     index_name=index_name,
@@ -37,7 +37,7 @@ docsearch = PineconeVectorStore.from_existing_index(
 
 retriever = docsearch.as_retriever(search_type="similarity", search_kwargs={"k": 3})
 
-chatModel = ChatGoogleGenerativeAI(model="gemini-2.5-flash")
+chatModel = ChatGoogleGenerativeAI(model="gemini-2.5-pro")
 prompt = ChatPromptTemplate.from_messages(
     [
         ("system", system_prompt),
