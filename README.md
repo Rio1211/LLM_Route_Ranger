@@ -1,4 +1,4 @@
-# LLM_Medical_Chatbot
+# Route Ranger
 
 # How to run?
 ### STEPS:
@@ -6,17 +6,17 @@
 Clone this repo
 
 ```bash
-Project repo: https://github.com/Rio1211/LLM_Medical_Chatbot.git
+Project repo: https://github.com/Rio1211/LLM_Route_Ranger.git
 ```
 
 ### Step 1 Create environment after cloning the repo
 
 ```bash
-conda create -n llm_medical_chatbot python=3.10 -y
+conda create -n llm_route_ranger python=3.10 -y
 ```
 
 ```bash
-conda activate llm_medical_chatbot
+conda activate llm_route_ranger
 ```
 
 ### Step 2 Install the requirements
@@ -48,7 +48,7 @@ python app.py
 - Python
 - LangChain
 - Flask
-- GPT
+- Gemini
 - Pinecone
 
 
