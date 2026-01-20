@@ -1,7 +1,9 @@
 # Route Ranger
 
 
+## 🎥 Demo
 
+![Demo](/demo.gif)
 
 # How to run?
 ### STEPS:
@@ -121,7 +123,3 @@ python app.py
    - ECR_REPO
    - PINECONE_API_KEY
    - GOOGLE_API_KEY
-
-## 🎥 Demo
-
-![Demo](/Demo.gif)
